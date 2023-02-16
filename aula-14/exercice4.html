@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Exercicios JS</title>
+  <link rel="stylesheet" type="text/css" href="global.css" />
+</head>
+
+<body>
+
+
+  <h1>Quarto Exemplo </h1>
+
+
+  <script>
+
+    let numero = parseInt(prompt('Insira um número inteiro positivo:'));
+
+
+    while (isNaN(numero) || numero <= 0) {
+      numero = parseInt(prompt('O número inserido não é válido. Insira um número inteiro positivo!'));
+    }
+
+
+    let calFatorial = 1;
+
+    for (let i = 1; i <= numero; i++) {
+      calFatorial *= i;
+    }
+
+
+    alert(`O Fatorial de ${numero} é ${calFatorial}.`);
+  </script>
+
+</body>
+
+</html>

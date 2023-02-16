@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JS</title>
+    <link rel="stylesheet" type="text/css" href="global.css" />
+</head>
+
+<body>
+    <h1>Segundo Exemplo</h1>
+
+    <script>
+
+        let numero = parseInt(prompt('Por favor, insira um número inteiro positivo:'));
+
+
+        while (isNaN(numero) || numero <= 0) {
+            numero = parseInt(prompt('O número inserido não é válido. Por favor, insira um número inteiro positivo:'));
+        }
+
+
+        let isPrimo = true;
+
+        for (let i = 2; i < numero; i++) {
+            if (numero % i === 0) {
+                isPrimo = false;
+                break;
+            }
+        }
+
+
+        if (isPrimo) {
+            alert(`${numero} é primo.`);
+        } else {
+            alert(`${numero}  não é primo.`);
+        }
+    </script>
+</body>
+
+</html>
