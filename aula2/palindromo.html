@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <label for="texto">Digite uma palavra ou frase:</label>
+    <input type="text" id="texto">
+    <button id="verificar">Verificar</button>
+
+
+    <script>
+        function ehPalindromo(texto) {
+            // remover espaços em branco e transformar em letras minúsculas
+            texto = texto.replace(/\s/g, "").toLowerCase();
+
+            // comparar o texto com sua versão invertida
+            return texto === texto.split("").reverse().join("");
+        }
+
+        const botaoVerificar = document.getElementById("verificar");
+        botaoVerificar.addEventListener("click", function () {
+            const campoTexto = document.getElementById("texto");
+            const texto = campoTexto.value.trim();
+            const mensagem = ehPalindromo(texto)
+                ? "O texto é um palíndromo!"
+                : "O texto não é um palíndromo.";
+            alert(mensagem);
+        });
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Relogio</title>
+</head>
+
+<body>
+    <h1 id="relogio"></h1>
+
+    <script>
+        function atualizarRelogio() {
+            const relogioElement = document.getElementById("relogio");
+            const agora = new Date();
+            const hora = agora.getHours();
+            const minuto = agora.getMinutes();
+            const segundo = agora.getSeconds();
+            const horaFormatada = hora < 10 ? `0${hora}` : hora;
+            const minutoFormatado = minuto < 10 ? `0${minuto}` : minuto;
+            const segundoFormatado = segundo < 10 ? `0${segundo}` : segundo;
+            const dataFormatada = agora.toLocaleDateString('pt-BR', {
+                weekday: 'long',
+                year: 'numeric',
+                month: 'long',
+                day: 'numeric'
+            });
+            const horaCompleta = `${horaFormatada}:${minutoFormatado}:${segundoFormatado}`;
+            relogioElement.textContent = `${dataFormatada} ${horaCompleta}`;
+        }
+
+        // atualizar a cada segundo
+        setInterval(atualizarRelogio, 1000);
+
+    </script>
+</body>
+
+</html>
