@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="container mt-5">
+      <form class="d-flex flex-column align-items-start" method="post">
+        <input type="text" placeholder="Criar Atividade" id="input" />
+        <button class="btn btn-primary mt-2" type="submit">Criar</button>
+      </form>
+    </div>
+
+    <ul class="container" id="minhalista"></ul>
+
+    <script>
+      addEventListener("submit", (event) => {
+        event.preventDefault();
+        let li = document.createElement("li");
+        let inputValue = document.getElementById("input").value;
+        let t = document.createTextNode(inputValue);
+        li.appendChild(t);
+
+        if (inputValue === "") {
+          alert("Campo Vazio !");
+        } else {
+          document.getElementById("minhalista").appendChild(li);
+        }
+        document.getElementById("input").value = "";
+      });
+    </script>
+  </body>
+</html>

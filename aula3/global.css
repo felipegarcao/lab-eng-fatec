@@ -1,0 +1,22 @@
+body {
+  text-align: center;
+  font-size: 1rem;
+  color: #fff;
+  padding-top: 75px;
+  background-color: #122f51;
+}
+
+p {
+  text-decoration: none;
+  color: #142026;
+  font-size: 20px;
+
+}
+
+
+.box-exercice {
+  background-color: #fff;
+  box-shadow: 0 3px 10px rgb(0 0 0 / 0.2);
+  padding: 2rem;
+  border-radius: 8px;
+}
