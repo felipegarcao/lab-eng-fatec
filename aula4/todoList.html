@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0" />
+    <title>Exercicio 2</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+      integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+      crossorigin="anonymous"
+    />
+    <link
+      rel="stylesheet"
+      href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"
+      integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p"
+      crossorigin="anonymous"
+    />
+    <style>
+      ul {
+        padding: 0;
+        list-style: none;
+        width: 100%;
+      }
+      li {
+        display: flex;
+        line-break: auto;
+        align-items: center;
+        margin-bottom: 10px;
+        padding: 10px;
+        width: 100%;
+        background-color: #f7f7f7;
+        border-radius: 5px;
+      }
+      li button {
+        margin-left: 10px;
+        cursor: pointer;
+      }
+      li button:first-child {
+        margin-left: 0;
+      }
+      .flex {
+        display: flex;
+        width: 100%;
+        flex-direction: row;
+      }
+      .space-between {
+        justify-content: space-between;
+      }
+      input,
+      button,
+      #lista {
+        margin-top: 15px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <nav class="navbar navbar-light bg-danger">
+      <a class="navbar-brand" href="#">Todo List</a>
+    </nav>
+    <div class="container mt-5">
+      <div class="d-flex">
+        <input type="text" id="novoItem" class="form-control mr-2" />
+        <button name="btnAdd" id="btnAdd" class="btn btn-danger">
+          Adicionar
+        </button>
+      </div>
+      <ul id="lista"></ul>
+    </div>
+    <script>
+      class Item {
+        constructor(id, texto) {
+          this.id = id;
+          this.texto = texto;
+          this.posicao = null;
+        }
+
+        atualizarPosicao(novaPosicao) {
+          this.posicao = novaPosicao;
+        }
+
+        renderizar() {
+          return `
+        <li id="${this.id}">
+          <div class="flex space-between">
+            <div >
+              <span>${this.texto}</span>
+              </div>
+              <div >
+                <button class="btn btn-dark " onclick="lista.reordenarItem('${
+                  this.id
+                }', ${this.posicao - 1})" ${
+            this.posicao === 0 ? "disabled" : ""
+          }><i class="fas fa-long-arrow-up"></i></button>
+          <button class="btn btn-dark" onclick="lista.reordenarItem('${this.id}', ${
+            this.posicao + 1
+          })" ${
+            this.posicao === lista.itens.length - 1 ? "disabled" : ""
+          }><i class="fas fa-long-arrow-down"></i></button>
+          <button class="btn btn-danger ml" onclick="lista.removerItem('${
+            this.id
+          }')"><i class="fas fa-trash"></i></button>
+                </div>
+            </div>
+         
+        </li>
+      `;
+        }
+      }
+
+      class Lista {
+        constructor() {
+          this.itens = [];
+        }
+
+        adicionarItem(texto) {
+          const novoId = Date.now().toString();
+          const novoItem = new Item(novoId, texto);
+          novoItem.atualizarPosicao(this.itens.length);
+          this.itens.push(novoItem);
+          this.renderizar();
+        }
+
+        removerItem(id) {
+          this.itens = this.itens.filter((item) => item.id !== id);
+          this.itens.forEach((item, index) => {
+            item.atualizarPosicao(index);
+          });
+          this.renderizar();
+        }
+
+        reordenarItem(id, novaPosicao) {
+          const item = this.itens.find((item) => item.id === id);
+          const posicaoAntiga = item.posicao;
+          this.itens.splice(posicaoAntiga, 1);
+          this.itens.splice(novaPosicao, 0, item);
+          this.itens.forEach((item, index) => item.atualizarPosicao(index));
+          this.renderizar();
+        }
+
+        renderizar() {
+          const listaHTML = this.itens
+            .map((item) => item.renderizar())
+            .join("");
+          document.getElementById("lista").innerHTML = listaHTML;
+        }
+      }
+
+      const lista = new Lista();
+      document.addEventListener("DOMContentLoaded", () => {
+        document.getElementById("btnAdd").addEventListener("click", () => {
+          const value = document.getElementById("novoItem").value;
+          if (value != "") {
+            lista.adicionarItem(value);
+            document.getElementById("novoItem").value = "";
+          }
+        });
+      });
+    </script>
+  </body>
+</html>
