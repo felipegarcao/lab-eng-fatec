@@ -82,31 +82,29 @@
         }
 
         renderizar() {
+          const isDisabledUpButton = this.posicao === 0 ? "disabled" : "";
+          const isDisabledDownButton =
+            this.posicao === lista.itens.length - 1 ? "disabled" : "";
           return `
-        <li id="${this.id}">
-          <div class="flex space-between">
-            <div >
-              <span>${this.texto}</span>
-              </div>
-              <div >
-                <button class="btn btn-dark " onclick="lista.reordenarItem('${
-                  this.id
-                }', ${this.posicao - 1})" ${
-            this.posicao === 0 ? "disabled" : ""
-          }><i class="fas fa-long-arrow-up"></i></button>
-          <button class="btn btn-dark" onclick="lista.reordenarItem('${this.id}', ${
+      <li id="${this.id}">
+        <div class="flex space-between">
+          <div>
+            <span>${this.texto}</span>
+          </div>
+          <div>
+            <button class="btn " onclick="lista.reordenarItem('${this.id}', ${
+            this.posicao - 1
+          })" ${isDisabledUpButton}><i class="fas fa-long-arrow-up"></i></button>
+            <button class="btn" onclick="lista.reordenarItem('${this.id}', ${
             this.posicao + 1
-          })" ${
-            this.posicao === lista.itens.length - 1 ? "disabled" : ""
-          }><i class="fas fa-long-arrow-down"></i></button>
-          <button class="btn btn-danger ml" onclick="lista.removerItem('${
-            this.id
-          }')"><i class="fas fa-trash"></i></button>
-                </div>
-            </div>
-         
-        </li>
-      `;
+          })" ${isDisabledDownButton}><i class="fas fa-long-arrow-down"></i></button>
+            <button class="btn btn-danger ml" onclick="lista.removerItem('${
+              this.id
+            }')"><i class="fas fa-trash"></i></button>
+          </div>
+        </div>
+      </li>
+    `;
         }
       }
 
@@ -144,19 +142,26 @@
           const listaHTML = this.itens
             .map((item) => item.renderizar())
             .join("");
-          document.getElementById("lista").innerHTML = listaHTML;
+          const listaElement = document.getElementById("lista");
+          if (listaElement) {
+            listaElement.innerHTML = listaHTML;
+          }
         }
       }
 
       const lista = new Lista();
+
       document.addEventListener("DOMContentLoaded", () => {
-        document.getElementById("btnAdd").addEventListener("click", () => {
-          const value = document.getElementById("novoItem").value;
-          if (value != "") {
-            lista.adicionarItem(value);
-            document.getElementById("novoItem").value = "";
-          }
-        });
+        const btnAdd = document.getElementById("btnAdd");
+        if (btnAdd) {
+          btnAdd.addEventListener("click", () => {
+            const novoItem = document.getElementById("novoItem");
+            if (novoItem && novoItem.value) {
+              lista.adicionarItem(novoItem.value);
+              novoItem.value = "";
+            }
+          });
+        }
       });
     </script>
   </body>
