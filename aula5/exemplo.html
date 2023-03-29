@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Introdução a React</title>
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+
+</head>
+<body>
+
+    <div id="root"></div>
+
+    <script type="text/babel">
+        const user = {
+            firstName: "Luis Felipe",
+            lastName: "Garção Silva",
+        }
+
+        const formataNome = (user) => {
+            return `${user.firstName} ${user.lastName}`;
+        }
+
+        const element = (
+            <div>
+                <h1 className="aa">Hello, {formataNome(user)}</h1>
+                <h2>Hello, {formataNome(user)}</h2>
+            </div>
+        )
+
+        ReactDOM.render(element, document.getElementById('root'))
+
+    </script>
+    
+</body>
+</html>
